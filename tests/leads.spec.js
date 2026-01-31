@@ -18,5 +18,18 @@ test('deve cadastrar um lead na fila de espera', async ({ page }) => {
   await page.getByTestId('modal')
     .getByText('Quero entrar na fila!').click()
 
-  await page.waitForTimeout(1000)
+
+  /* irá pegar o conteúdo HTML do toast e imprimir no 
+     console da UI do Playwright 
+     
+  await page.getByText('seus dados conosco').click()
+   const content = await page.content()
+   console.log(content)
+   */
+
+  const message = ('Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!')
+
+  await expect(page.locator('.toast')).toHaveText(message)
+  await expect(page.locator('.toast')).toBeHidden({ timeout: 5000 })
+
 });
