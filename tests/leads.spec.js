@@ -37,9 +37,7 @@ test('Positive Test Scenario', async ({ page }) => {
 test('Negative Test Scenario', async ({ page }) => {
   await page.goto('http://localhost:3000');
 
-  //await page.click('//button[text()="Aperte o play... se tiver coragem"]') técnica de xpath
-
-  await page.getByRole('button', { name: /Aperte o play/ }).click() //getByRole é mais comum no playwright.
+  await page.getByRole('button', { name: /Aperte o play/ }).click()
 
   await expect(
     page.getByTestId('modal').getByRole('heading')
@@ -76,9 +74,7 @@ test('Negative Test - name field empty', async ({ page }) => {
 test('Negative Test - email empty', async ({ page }) => {
   await page.goto('http://localhost:3000');
 
-  //await page.click('//button[text()="Aperte o play... se tiver coragem"]') técnica de xpath
-
-  await page.getByRole('button', { name: /Aperte o play/ }).click() //getByRole é mais comum no playwright.
+  await page.getByRole('button', { name: /Aperte o play/ }).click() 
 
   await expect(
     page.getByTestId('modal').getByRole('heading')
@@ -95,9 +91,7 @@ test('Negative Test - email empty', async ({ page }) => {
 test('Negative Test - all fields empty', async ({ page }) => {
   await page.goto('http://localhost:3000');
 
-  //await page.click('//button[text()="Aperte o play... se tiver coragem"]') técnica de xpath
-
-  await page.getByRole('button', { name: /Aperte o play/ }).click() //getByRole é mais comum no playwright.
+  await page.getByRole('button', { name: /Aperte o play/ }).click() 
 
   await expect(
     page.getByTestId('modal').getByRole('heading')
