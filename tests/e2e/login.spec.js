@@ -1,9 +1,17 @@
 const { test, expect } = require('@playwright/test')
 
-test('should log in successfully', async ({page}) => {
-   await page.goto('http://localhost:3000/admin/login')
+const { LoginPage } = require('../pages/LoginPage')
 
-   const loginForm = page.locator('.login-form')
-   await expect(loginForm).toBeVisible()
+let loginPage
+
+test.beforeEach(({ page }) => {
+    loginPage = new LoginPage(page)
+
+})
+
+test('should log in successfully', async ({ page }) => {
+    await loginPage.visit()
+    await loginPage.submit('admin@zombieplus.com', 'pwd123')
+    await loginPage.isLoggedIn()
 
 })
