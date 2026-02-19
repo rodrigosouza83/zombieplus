@@ -3,6 +3,12 @@ import { test, expect } from '@playwright/test';
 
 const { LandingPage } = require('./pages/LandingPage')
 
+let landingPage;
+
+test.beforeEach(async ({ page }) => {
+  landingPage = new LandingPage(page)
+})
+
 test('Positive Test Scenario', async ({ page }) => {
   const landingPage = new LandingPage(page)
 
@@ -16,8 +22,6 @@ test('Positive Test Scenario', async ({ page }) => {
 });
 
 test('Negative Test Scenario', async ({ page }) => {
-  const landingPage = new LandingPage(page)
-
   await landingPage.visit()
   await landingPage.openLeadModal()
   await landingPage.submitLeadForm('Rodrigo Souza', 'rodsz.mail.com')
@@ -26,8 +30,6 @@ test('Negative Test Scenario', async ({ page }) => {
 })
 
 test('Negative Test - name field empty', async ({ page }) => {
-  const landingPage = new LandingPage(page)
-
   await landingPage.visit()
   await landingPage.openLeadModal()
   await landingPage.submitLeadForm('', 'rodsz@gmail.com')
@@ -36,8 +38,6 @@ test('Negative Test - name field empty', async ({ page }) => {
 })
 
 test('Negative Test - email empty', async ({ page }) => {
-  const landingPage = new LandingPage(page)
-
   await landingPage.visit()
   await landingPage.openLeadModal()
   await landingPage.submitLeadForm('Rodrigo Souza', '')
@@ -46,8 +46,6 @@ test('Negative Test - email empty', async ({ page }) => {
 })
 
 test('Negative Test - all fields empty', async ({ page }) => {
-  const landingPage = new LandingPage(page)
-
   await landingPage.visit()
   await landingPage.openLeadModal()
   await landingPage.submitLeadForm('', '')
