@@ -48,7 +48,7 @@ test('Negative Test Scenario', async ({ page }) => {
 
   await page.getByTestId('modal')
     .getByText('Quero entrar na fila!').click()
-  
+
   await expect(page.locator('.alert')).toHaveText('Email incorreto')
 })
 
@@ -67,14 +67,14 @@ test('Negative Test - name field empty', async ({ page }) => {
 
   await page.getByTestId('modal')
     .getByText('Quero entrar na fila!').click()
-  
+
   await expect(page.locator('.alert')).toHaveText('Campo obrigatório')
 })
 
 test('Negative Test - email empty', async ({ page }) => {
   await page.goto('http://localhost:3000');
 
-  await page.getByRole('button', { name: /Aperte o play/ }).click() 
+  await page.getByRole('button', { name: /Aperte o play/ }).click()
 
   await expect(
     page.getByTestId('modal').getByRole('heading')
@@ -84,14 +84,14 @@ test('Negative Test - email empty', async ({ page }) => {
 
   await page.getByTestId('modal')
     .getByText('Quero entrar na fila!').click()
-  
+
   await expect(page.locator('.alert')).toHaveText('Campo obrigatório')
 })
 
 test('Negative Test - all fields empty', async ({ page }) => {
   await page.goto('http://localhost:3000');
 
-  await page.getByRole('button', { name: /Aperte o play/ }).click() 
+  await page.getByRole('button', { name: /Aperte o play/ }).click()
 
   await expect(
     page.getByTestId('modal').getByRole('heading')
@@ -99,6 +99,6 @@ test('Negative Test - all fields empty', async ({ page }) => {
 
   await page.getByTestId('modal')
     .getByText('Quero entrar na fila!').click()
-  
+
   await expect(page.locator('.alert')).toHaveText(['Campo obrigatório', 'Campo obrigatório'])
 })

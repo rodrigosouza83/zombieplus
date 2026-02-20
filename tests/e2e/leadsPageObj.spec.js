@@ -8,6 +8,7 @@ const { Toast } = require('../pages/Components')
 let landingPage
 let toast
 
+
 test.beforeEach(async ({ page }) => {
   landingPage = new LandingPage(page)
   toast = new Toast(page)
