@@ -1,7 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test('Positive Test Scenario', async ({ page }) => {
+test.skip('Positive Test Scenario', async ({ page }) => {
   await page.goto('http://localhost:3000');
 
   //await page.click('//button[text()="Aperte o play... se tiver coragem"]') técnica de xpath
@@ -12,8 +12,8 @@ test('Positive Test Scenario', async ({ page }) => {
     page.getByTestId('modal').getByRole('heading')
   ).toHaveText('Fila de espera')
 
-  await page.getByPlaceholder('Seu nome completo').fill('Rodrigo Souza')
-  await page.getByPlaceholder('Seu email principal').fill('rodsouza@gmail.com')
+  await page.getByPlaceholder('Informe seu nome').fill('Rodrigo Souza')
+  await page.getByPlaceholder('Informe seu email').fill('rodsouza@gmail.com')
 
   await page.getByTestId('modal')
     .getByText('Quero entrar na fila!').click()
@@ -43,8 +43,8 @@ test('Negative Test Scenario', async ({ page }) => {
     page.getByTestId('modal').getByRole('heading')
   ).toHaveText('Fila de espera')
 
-  await page.getByPlaceholder('Seu nome completo').fill('Rodrigo Souza')
-  await page.getByPlaceholder('Seu email principal').fill('rod.com.br')
+  await page.getByPlaceholder('Informe seu nome').fill('Rodrigo Souza')
+  await page.getByPlaceholder('Informe seu email').fill('rod.com.br')
 
   await page.getByTestId('modal')
     .getByText('Quero entrar na fila!').click()
@@ -63,7 +63,7 @@ test('Negative Test - name field empty', async ({ page }) => {
     page.getByTestId('modal').getByRole('heading')
   ).toHaveText('Fila de espera')
 
-  await page.getByPlaceholder('Seu email principal').fill('rod@gmail.com')
+  await page.getByPlaceholder('Informe seu email').fill('rod@gmail.com')
 
   await page.getByTestId('modal')
     .getByText('Quero entrar na fila!').click()
@@ -80,7 +80,7 @@ test('Negative Test - email empty', async ({ page }) => {
     page.getByTestId('modal').getByRole('heading')
   ).toHaveText('Fila de espera')
 
-  await page.getByPlaceholder('Seu nome completo').fill('Rodrigo Souza')
+  await page.getByPlaceholder('Informe seu nome').fill('Rodrigo Souza')
 
   await page.getByTestId('modal')
     .getByText('Quero entrar na fila!').click()

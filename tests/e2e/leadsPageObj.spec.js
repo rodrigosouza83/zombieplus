@@ -1,5 +1,10 @@
 // @ts-check
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test'
+
+const { faker } = require('@faker-js/faker')
+
+const leadsName = faker.person.fullName()
+const leadsEmail = faker.internet.email()
 
 const { LandingPage } = require('../pages/LandingPage')
 
@@ -19,7 +24,7 @@ test('Positive Test Scenario', async ({ page }) => {
 
   await landingPage.visit()
   await landingPage.openLeadModal()
-  await landingPage.submitLeadForm('Rodrigo Souza', 'rodsz@gmail.com')
+  await landingPage.submitLeadForm(leadsName, leadsEmail)
   const message = ('Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!')
   await toast.haveText(message)
 
