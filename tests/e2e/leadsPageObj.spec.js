@@ -26,24 +26,29 @@ test('Positive Test Scenario', async ({ page }) => {
   await toast.haveText(message)
 })
 
-test('Negative Test Scenario - using the same email', async ({ page }) => {
+test('Negative Test Scenario - using the same email', async ({ page, request }) => {
   const landingPage = new LandingPage(page)
   const toast = new Toast(page)
 
-  const successMessage =
-    'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
+  const leadsName = faker.person.fullName()
+  const leadsEmail = faker.internet.email()
 
-  const duplicateMessage =
-    'O endereço de e-mail fornecido já está registrado em nossa fila de espera.'
+  const newLead = await request.post('http://localhost:3333/leads', {
+    data: {
+      name: leadsName,
+      email: leadsEmail
+    }
+  })
+
+  expect(newLead.ok()).toBeTruthy()
 
   await landingPage.visit()
   await landingPage.openLeadModal()
   await landingPage.submitLeadForm(leadsName, leadsEmail)
-  await toast.haveText(successMessage)
 
-  await landingPage.openLeadModal()
-  await landingPage.submitLeadForm('Outro Nome', leadsEmail)
-  await toast.haveText(duplicateMessage)
+  await toast.haveText(
+    'O endereço de e-mail fornecido já está registrado em nossa fila de espera.'
+  )
 })
 
 test('Negative Test Scenario', async ({ page }) => {
