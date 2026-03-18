@@ -22,4 +22,6 @@ test('should be register a new movie', async ({ page }) => {
     await loginPage.submit('admin@zombieplus.com', 'pwd123')
     await moviesPage.isLoggedIn()
 
+    await moviesPage.create('Nome do filme', 'Sinopse', 'Empresa', '2023')
+
 })
