@@ -1,0 +1,82 @@
+{
+  "a_noite_dos_mortos_vivos": {
+    "title": "A Noite dos Mortos-Vivos",
+    "overview": "Um grupo de pessoas se refugia em uma casa isolada enquanto mortos-vivos começam a atacar e tomar conta da região.",
+    "company": "Continental Distributing",
+    "release_year": 1968,
+    "featured": false,
+    "cover": "/images/a-noite-dos-mortos-vivos.png"
+  },
+  "despertar_dos_mortos": {
+    "title": "Despertar dos Mortos",
+    "overview": "Sobreviventes de um apocalipse zumbi se escondem em um shopping center enquanto o mundo ao redor entra em colapso.",
+    "company": "United Film Distribution Company",
+    "release_year": 1978,
+    "featured": false,
+    "cover": "/images/despertar-dos-mortos.png"
+  },
+  "dia_dos_mortos": {
+    "title": "Dia dos Mortos",
+    "overview": "Cientistas e militares vivem em um bunker subterrâneo tentando entender e sobreviver à dominação dos zumbis.",
+    "company": "United Film Distribution Company",
+    "release_year": 1985,
+    "featured": false,
+    "cover": "/images/dia-dos-mortos.png"
+  },
+  "a_volta_dos_mortos_vivos": {
+    "title": "A Volta dos Mortos-Vivos",
+    "overview": "Um produto químico libera mortos-vivos famintos por cérebros, espalhando caos e terror em uma pequena cidade.",
+    "company": "Orion Pictures",
+    "release_year": 1985,
+    "featured": false,
+    "cover": "/images/a-volta-dos-mortos-vivos.png"
+  },
+  "fome_animal": {
+    "title": "Fome Animal",
+    "overview": "Após sua mãe ser contaminada por uma criatura exótica, um jovem enfrenta uma infestação grotesca de zumbis.",
+    "company": "Trimark Pictures",
+    "release_year": 1992,
+    "featured": false,
+    "cover": "/images/fome-animal.png"
+  },
+  "exterminio": {
+    "title": "Extermínio",
+    "overview": "Um homem acorda de um coma e descobre que Londres foi devastada por um vírus que transforma pessoas em seres violentos.",
+    "company": "Fox Searchlight Pictures",
+    "release_year": 2002,
+    "featured": false,
+    "cover": "/images/exterminio.png"
+  },
+  "todo_mundo_quase_morto": {
+    "title": "Todo Mundo Quase Morto",
+    "overview": "Um homem comum tenta salvar sua família e amigos durante um inesperado apocalipse zumbi em Londres.",
+    "company": "Universal Pictures",
+    "release_year": 2004,
+    "featured": false,
+    "cover": "/images/todo-mundo-quase-morto.png"
+  },
+  "madrugada_dos_mortos": {
+    "title": "Madrugada dos Mortos",
+    "overview": "Em meio a uma epidemia zumbi, um grupo de sobreviventes encontra abrigo em um shopping enquanto luta para sobreviver.",
+    "company": "Universal Pictures",
+    "release_year": 2004,
+    "featured": false,
+    "cover": "/images/madrugada-dos-mortos.png"
+  },
+  "zumbilandia": {
+    "title": "Zumbilândia",
+    "overview": "Quatro sobreviventes atravessam os Estados Unidos enfrentando zumbis enquanto tentam se manter vivos e encontrar um lugar seguro.",
+    "company": "Columbia Pictures",
+    "release_year": 2009,
+    "featured": false,
+    "cover": "/images/zumbilandia.png"
+  },
+  "guerra_mundial_z": {
+    "title": "Guerra Mundial Z",
+    "overview": "Um ex-investigador da ONU viaja pelo mundo em busca de uma forma de conter uma pandemia global que transforma humanos em zumbis.",
+    "company": "Paramount Pictures",
+    "release_year": 2013,
+    "featured": false,
+    "cover": "/images/guerra-mundial-z.png"
+  }
+}
