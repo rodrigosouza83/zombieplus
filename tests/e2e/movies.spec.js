@@ -1,37 +1,34 @@
-const { test } = require('@playwright/test')
+const { test } = require('../support')
 
 const data = require('../support/fixtures/movies.json')
-
 const { executeSQL } = require('../support/database')
 
-const { LoginPage } = require('../pages/LoginPage')
+test('deve poder cadastrar um novo filme', async ({ page }) => {
+    const movie = data.create
+    await executeSQL(`DELETE from movies WHERE title = '${movie.title}';`)
 
-const { MoviesPage } = require('../pages/MoviesPages')
+    await page.login.visit()
+    await page.login.submit('admin@zombieplus.com', 'pwd123')
+    await page.movies.isLoggedIn()
 
-const { Toast } = require('../pages/Components')
-
-let loginPage
-let moviesPage
-let toast
-
-test.beforeEach(({ page }) => {
-    loginPage = new LoginPage(page)
-    moviesPage = new MoviesPage(page)
-    toast = new Toast(page)
-
+    await page.movies.create(movie)
+    await page.toast.containText('Cadastro realizado com sucesso!')
 })
 
-test('should be register a new movie', async ({ page }) => {
+test('não deve cadastrar quando os campos obrigatórios não são preenchidos', async ({ page }) => {
 
-    const movie = data.create
+    await page.login.visit()
+    await page.login.submit('admin@zombieplus.com', 'pwd123')
+    await page.movies.isLoggedIn()
 
-    await executeSQL(`DELETE from movies WHERE title = '${movie.title}';`)
-    await loginPage.visit()
-    await loginPage.submit('admin@zombieplus.com', 'pwd123')
-    await moviesPage.isLoggedIn()
+    await page.movies.goForm()
+    await page.movies.submit()
 
-    await moviesPage.create(movie.title, movie.overview, movie.company, movie.release_year)
+    await page.movies.alertHaveText([
+        'Por favor, informe o título.',
+        'Por favor, informe a sinopse.',
+        'Por favor, informe a empresa distribuidora.',
+        'Por favor, informe o ano de lançamento.'
 
-    await toast.haveText('Cadastro realizado com sucesso!')
-
+    ])
 })
