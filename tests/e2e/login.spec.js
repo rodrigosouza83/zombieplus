@@ -1,58 +1,35 @@
-const { test, expect } = require('@playwright/test')
-
-const { LoginPage } = require('../pages/LoginPage')
-
-const { MoviesPage } = require('../pages/MoviesPages')
-
-const { Toast } = require('../pages/Components')
-
-let loginPage
-let moviesPage
-let toast
-
-test.beforeEach(({ page }) => {
-    loginPage = new LoginPage(page)
-    moviesPage = new MoviesPage(page)
-    toast = new Toast(page)
-
-})
+const { test } = require('../support')
 
 test('should log in successfully', async ({ page }) => {
-    await loginPage.visit()
-    await loginPage.submit('admin@zombieplus.com', 'pwd123')
-    await moviesPage.isLoggedIn()
-
+    await page.login.visit()
+    await page.login.submit('admin@zombieplus.com', 'pwd123')
+    await page.movies.isLoggedIn()
 })
 
-test('trying to validate using an invalid email', async ({ page }) => {
-    await loginPage.visit()
-    await loginPage.submit('www.rodrigo.com.br', 'pwd1234')
+test('should not log in with an invalid email format', async ({ page }) => {
+    await page.login.visit()
+    await page.login.submit('www.rodrigo.com.br', 'pwd1234')
 
-    await loginPage.alertHaveText('Email incorreto')
+    await page.login.alertHaveText('Email incorreto')
 })
 
-test('trying to validate using an empty email field', async ({ page }) => {
-    await loginPage.visit()
-    await loginPage.submit('', 'pwd1234')
+test('should not log in when email field is empty', async ({ page }) => {
+    await page.login.visit()
+    await page.login.submit('', 'pwd1234')
 
-    await loginPage.alertHaveText('Campo obrigatório')
+    await page.login.alertHaveText('Campo obrigatório')
 })
 
-test('trying to validate using empty password field', async ({ page }) => {
-    await loginPage.visit()
-    await loginPage.submit('rods83@gmail.com', '')
+test('should not log in when password field is empty', async ({ page }) => {
+    await page.login.visit()
+    await page.login.submit('rods83@gmail.com', '')
 
-    await loginPage.alertHaveText('Campo obrigatório')
+    await page.login.alertHaveText('Campo obrigatório')
 })
 
+test('should not log in when email and password fields are empty', async ({ page }) => {
+    await page.login.visit()
+    await page.login.submit('', '')
 
-test('trying to validate using empty  email and password field', async ({ page }) => {
-    await loginPage.visit()
-    await loginPage.submit('', '')
-
-    await loginPage.alertHaveText(['Campo obrigatório', 'Campo obrigatório'])
+    await page.login.alertHaveText(['Campo obrigatório', 'Campo obrigatório'])
 })
-
-
-
-

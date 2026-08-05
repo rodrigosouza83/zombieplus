@@ -3,7 +3,7 @@ const { test } = require('../support')
 const data = require('../support/fixtures/movies.json')
 const { executeSQL } = require('../support/database')
 
-test('deve poder cadastrar um novo filme', async ({ page }) => {
+test('should register a new movie successfully', async ({ page }) => {
     const movie = data.create
     await executeSQL(`DELETE from movies WHERE title = '${movie.title}';`)
 
@@ -15,7 +15,7 @@ test('deve poder cadastrar um novo filme', async ({ page }) => {
     await page.toast.containText('Cadastro realizado com sucesso!')
 })
 
-test('não deve cadastrar quando os campos obrigatórios não são preenchidos', async ({ page }) => {
+test('should not register movie when required fields are empty', async ({ page }) => {
 
     await page.login.visit()
     await page.login.submit('admin@zombieplus.com', 'pwd123')

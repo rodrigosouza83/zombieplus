@@ -1,104 +1,55 @@
-// @ts-check
-import { test, expect } from '@playwright/test';
+const { test } = require('../support')
 
-test.skip('Positive Test Scenario', async ({ page }) => {
-  await page.goto('http://localhost:3000');
+test.skip('should register a new lead successfully', async ({ page }) => {
+    await page.landing.visit()
 
-  //await page.click('//button[text()="Aperte o play... se tiver coragem"]') técnica de xpath
+    //await page.click('//button[text()="Aperte o play... se tiver coragem"]') técnica de xpath
 
-  await page.getByRole('button', { name: /Aperte o play/ }).click() //getByRole é mais comum no playwright.
+    await page.landing.openLeadModal()
 
-  await expect(
-    page.getByTestId('modal').getByRole('heading')
-  ).toHaveText('Fila de espera')
+    await page.landing.submitLeadForm('Rodrigo Souza', 'rodsouza@gmail.com')
 
-  await page.getByPlaceholder('Informe seu nome').fill('Rodrigo Souza')
-  await page.getByPlaceholder('Informe seu email').fill('rodsouza@gmail.com')
+    /* irá pegar o conteúdo HTML do toast e imprimir no
+       console da UI do Playwright
 
-  await page.getByTestId('modal')
-    .getByText('Quero entrar na fila!').click()
+    await page.getByText('seus dados conosco').click()
+     const content = await page.content()
+     console.log(content)
+     */
 
+    const message = ('Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!')
 
-  /* irá pegar o conteúdo HTML do toast e imprimir no 
-     console da UI do Playwright 
-     
-  await page.getByText('seus dados conosco').click()
-   const content = await page.content()
-   console.log(content)
-   */
-
-  const message = ('Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!')
-
-  await expect(page.locator('.toast')).toHaveText(message)
-  await expect(page.locator('.toast')).toBeHidden({ timeout: 5000 })
-
-});
-
-test('Negative Test Scenario', async ({ page }) => {
-  await page.goto('http://localhost:3000');
-
-  await page.getByRole('button', { name: /Aperte o play/ }).click()
-
-  await expect(
-    page.getByTestId('modal').getByRole('heading')
-  ).toHaveText('Fila de espera')
-
-  await page.getByPlaceholder('Informe seu nome').fill('Rodrigo Souza')
-  await page.getByPlaceholder('Informe seu email').fill('rod.com.br')
-
-  await page.getByTestId('modal')
-    .getByText('Quero entrar na fila!').click()
-
-  await expect(page.locator('.alert')).toHaveText('Email incorreto')
+    await page.toast.haveText(message)
 })
 
-test('Negative Test - name field empty', async ({ page }) => {
-  await page.goto('http://localhost:3000');
+test('should not register lead with invalid email format', async ({ page }) => {
+    await page.landing.visit()
+    await page.landing.openLeadModal()
+    await page.landing.submitLeadForm('Rodrigo Souza', 'rod.com.br')
 
-  //await page.click('//button[text()="Aperte o play... se tiver coragem"]') técnica de xpath
-
-  await page.getByRole('button', { name: /Aperte o play/ }).click() //getByRole é mais comum no playwright.
-
-  await expect(
-    page.getByTestId('modal').getByRole('heading')
-  ).toHaveText('Fila de espera')
-
-  await page.getByPlaceholder('Informe seu email').fill('rod@gmail.com')
-
-  await page.getByTestId('modal')
-    .getByText('Quero entrar na fila!').click()
-
-  await expect(page.locator('.alert')).toHaveText('Campo obrigatório')
+    await page.landing.alertHaveText('Email incorreto')
 })
 
-test('Negative Test - email empty', async ({ page }) => {
-  await page.goto('http://localhost:3000');
+test('should not register lead when name field is empty', async ({ page }) => {
+    await page.landing.visit()
+    await page.landing.openLeadModal()
+    await page.landing.submitLeadForm('', 'rod@gmail.com')
 
-  await page.getByRole('button', { name: /Aperte o play/ }).click()
-
-  await expect(
-    page.getByTestId('modal').getByRole('heading')
-  ).toHaveText('Fila de espera')
-
-  await page.getByPlaceholder('Informe seu nome').fill('Rodrigo Souza')
-
-  await page.getByTestId('modal')
-    .getByText('Quero entrar na fila!').click()
-
-  await expect(page.locator('.alert')).toHaveText('Campo obrigatório')
+    await page.landing.alertHaveText('Campo obrigatório')
 })
 
-test('Negative Test - all fields empty', async ({ page }) => {
-  await page.goto('http://localhost:3000');
+test('should not register lead when email field is empty', async ({ page }) => {
+    await page.landing.visit()
+    await page.landing.openLeadModal()
+    await page.landing.submitLeadForm('Rodrigo Souza', '')
 
-  await page.getByRole('button', { name: /Aperte o play/ }).click()
+    await page.landing.alertHaveText('Campo obrigatório')
+})
 
-  await expect(
-    page.getByTestId('modal').getByRole('heading')
-  ).toHaveText('Fila de espera')
+test('should not register lead when all fields are empty', async ({ page }) => {
+    await page.landing.visit()
+    await page.landing.openLeadModal()
+    await page.landing.submitLeadForm('', '')
 
-  await page.getByTestId('modal')
-    .getByText('Quero entrar na fila!').click()
-
-  await expect(page.locator('.alert')).toHaveText(['Campo obrigatório', 'Campo obrigatório'])
+    await page.landing.alertHaveText(['Campo obrigatório', 'Campo obrigatório'])
 })

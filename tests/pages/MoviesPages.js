@@ -1,4 +1,4 @@
-const { expect } = require('../support')
+const { expect } = require('@playwright/test')
 
 export class MoviesPage {
     constructor(page) {
@@ -36,7 +36,7 @@ export class MoviesPage {
         await this.submit()
     }
 
-      async alertHaveText(target) {
+    async alertHaveText(target) {
         await expect(this.page.locator('.alert')).toHaveText(target)
     }
 }
